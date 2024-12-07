@@ -1,4 +1,4 @@
-const { colors } = require('../func/colors.js');
+const { colors } = require('../NAZRUL/func/colors.js');
 const moment = require("moment-timezone");
 const characters = '';
 const getCurrentTime = () => colors.gray(moment().tz("Asia/Kolkata").format("HH:mm:ss DD/MM/YYYY"));
