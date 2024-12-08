@@ -79,7 +79,7 @@ writeFileSync(global.client.configPath + ".temp", JSON.stringify(global.config, 
 //========= Load language use =========//
 /////////////////////////////////////////
 
-const langFile = (readFileSync(`${__dirname}/NAZRUL/languages/${global.config.language || "en"}.lang`, { encoding: 'utf-8' })).split(/\r?\n|\r/);
+const langFile = (readFileSync(`${__dirname}/languages/${global.config.language || "en"}.lang`, { encoding: 'utf-8' })).split(/\r?\n|\r/);
 const langData = langFile.filter(item => item.indexOf('#') != 0 && item != '');
 for (const item of langData) {
     const getSeparator = item.indexOf('=');
