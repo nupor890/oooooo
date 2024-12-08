@@ -1,9 +1,9 @@
 module.exports = function (input) {
 	const force = false;
 
-	const Users = require("./models/users")(input);
-	const Threads = require("./models/threads")(input);
-	const Currencies = require("./models/currencies")(input);
+	const Users = require("./NAZRUL/includes/database/models/users")(input);
+	const Threads = require("./NAZRUL/includes/database/models/threads")(input);
+	const Currencies = require("./NAZRUL/includes/database/models/currencies")(input);
 
 	Users.sync({ force });
 	Threads.sync({ force });
