@@ -137,12 +137,12 @@ module.exports = function({ api, models }) {
 	//========= Require all handle need =========//
 	//////////////////////////////////////////////
 
-	const handleCommand = require("./handle/handleCommand")({ api, models, Users, Threads, Currencies });
-	const handleCommandEvent = require("./handle/handleCommandEvent")({ api, models, Users, Threads, Currencies });
-	const handleReply = require("./handle/handleReply")({ api, models, Users, Threads, Currencies });
-	const handleReaction = require("./handle/handleReaction")({ api, models, Users, Threads, Currencies });
-	const handleEvent = require("./handle/handleEvent")({ api, models, Users, Threads, Currencies });
-	const handleCreateDatabase = require("./handle/handleCreateDatabase")({  api, Threads, Users, Currencies, models });
+	const handleCommand = require("./includes/handle/handleCommand")({ api, models, Users, Threads, Currencies });
+	const handleCommandEvent = require("./includes/handle/handleCommandEvent")({ api, models, Users, Threads, Currencies });
+	const handleReply = require("./includes/handle/handleReply")({ api, models, Users, Threads, Currencies });
+	const handleReaction = require("./includes/handle/handleReaction")({ api, models, Users, Threads, Currencies });
+	const handleEvent = require("./includes/handle/handleEvent")({ api, models, Users, Threads, Currencies });
+	const handleCreateDatabase = require("./includes/handle/handleCreateDatabase")({  api, Threads, Users, Currencies, models });
 
 	logger.loader(`====== ${Date.now() - global.client.timeStart}ms ======`);
 
