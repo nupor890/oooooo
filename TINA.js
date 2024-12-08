@@ -34,7 +34,7 @@ global.data = new Object({
     allThreadID: new Array()
 });
 
-global.utils = require("./utils");
+global.utils = require("./NAZRUL/utils");
 
 global.nodemodule = new Object();
 
