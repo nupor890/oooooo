@@ -52,7 +52,7 @@ global.language = new Object();
 
 var configValue;
 try {
-    global.client.configPath = join(global.client.mainPath, "Nazrul.json");
+    global.client.configPath = join(global.client.mainPath, "config.json");
     configValue = require(global.client.configPath);
     logger.loader("Found file config: Nazrul.json");
 }
