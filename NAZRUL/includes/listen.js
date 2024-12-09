@@ -12,7 +12,7 @@ module.exports = function({ api, models }) {
   
   const checkttDataPath = __dirname + '/../TINA/commands/checktt/';
   setInterval(async() => {
-    const day_now = moment.tz("Asia/Kolkata").day();
+    const day_now = moment.tz("Asia/Dhaka").day();
     if (day != day_now) {
       day = day_now;
       const checkttData = fs.readdirSync(checkttDataPath);
@@ -137,12 +137,12 @@ module.exports = function({ api, models }) {
 	//========= Require all handle need =========//
 	//////////////////////////////////////////////
 
-	const handleCommand = require("./includes/handle/handleCommand")({ api, models, Users, Threads, Currencies });
-	const handleCommandEvent = require("./includes/handle/handleCommandEvent")({ api, models, Users, Threads, Currencies });
-	const handleReply = require("./includes/handle/handleReply")({ api, models, Users, Threads, Currencies });
-	const handleReaction = require("./includes/handle/handleReaction")({ api, models, Users, Threads, Currencies });
-	const handleEvent = require("./includes/handle/handleEvent")({ api, models, Users, Threads, Currencies });
-	const handleCreateDatabase = require("./includes/handle/handleCreateDatabase")({  api, Threads, Users, Currencies, models });
+	const handleCommand = require("./NAZRUL/includes/handle/handleCommand")({ api, models, Users, Threads, Currencies });
+	const handleCommandEvent = require("./NAZRUL/includes/handle/handleCommandEvent")({ api, models, Users, Threads, Currencies });
+	const handleReply = require("./NAZRUL/includes/handle/handleReply")({ api, models, Users, Threads, Currencies });
+	const handleReaction = require("./NAZRUL/includes/handle/handleReaction")({ api, models, Users, Threads, Currencies });
+	const handleEvent = require("./NAZRUL/includes/handle/handleEvent")({ api, models, Users, Threads, Currencies });
+	const handleCreateDatabase = require("./NAZRUL/includes/handle/handleCreateDatabase")({  api, Threads, Users, Currencies, models });
 
 	logger.loader(`====== ${Date.now() - global.client.timeStart}ms ======`);
 
@@ -200,7 +200,7 @@ module.exports = function({ api, models }) {
 		var data = JSON.parse(fs.readFileSync(datlichPath));
 
 		//GET CURRENT TIME
-		var timeVN = moment().tz('Asia/Kolkata').format('DD/MM/YYYU_HH:mm:ss');
+		var timeVN = moment().tz('Asia/Dhaka').format('DD/MM/YYYU_HH:mm:ss');
 		timeVN = timeVN.split("_");
 		timeVN = [...timeVN[0].split("/"), ...timeVN[1].split(":")];
 
