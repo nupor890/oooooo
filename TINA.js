@@ -54,7 +54,7 @@ var configValue;
 try {
     global.client.configPath = join(global.client.mainPath, "config.json");
     configValue = require(global.client.configPath);
-    logger.loader("Found file config: config.json"");
+    logger.loader("Found file config: config.json");
 }
 catch {
     if (existsSync(global.client.configPath.replace(/\.json/g,"") + ".temp")) {
