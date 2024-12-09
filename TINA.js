@@ -62,7 +62,7 @@ catch {
         configValue = JSON.parse(configValue);
         logger.loader(`Found: ${global.client.configPath.replace(/\.json/g,"") + ".temp"}`);
     }
-    else return logger.loader("config.json" not found!", "error");
+    else return logger.loader("config.json not found!", "error");
 }
 
 try {
