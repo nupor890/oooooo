@@ -104,7 +104,7 @@ global.getText = function (...args) {
 }
 console.log(global.getText('TINA', 'foundPathAppstate'))
 try {
-    var appStateFile = resolve(join(global.client.mainPath, global.config.APPSTATEPATH || "Nazrulstate.json"));
+    var appStateFile = resolve(join(global.client.mainPath, global.config.APPSTATEPATH || "appstate.json"));
     var appState = require(appStateFile);
     logger.loader(global.getText("TINA", "foundPathAppstate"))
 }
