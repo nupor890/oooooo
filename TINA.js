@@ -54,7 +54,7 @@ var configValue;
 try {
     global.client.configPath = join(global.client.mainPath, "config.json");
     configValue = require(global.client.configPath);
-    logger.loader("Found file config: Nazrul.json");
+    logger.loader("Found file config: config.json"");
 }
 catch {
     if (existsSync(global.client.configPath.replace(/\.json/g,"") + ".temp")) {
@@ -62,7 +62,7 @@ catch {
         configValue = JSON.parse(configValue);
         logger.loader(`Found: ${global.client.configPath.replace(/\.json/g,"") + ".temp"}`);
     }
-    else return logger.loader("Nazrul.json not found!", "error");
+    else return logger.loader("config.json" not found!", "error");
 }
 
 try {
