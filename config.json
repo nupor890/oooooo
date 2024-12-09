@@ -63,7 +63,7 @@
             "storage": "data.sqlite"
         }
     },
-    "APPSTATEPATH": "Nazrulstate.json",
+    "APPSTATEPATH": "appstate.json",
     "FCAOption": {
         "forceLogin": true,
         "listenEvents": true,
