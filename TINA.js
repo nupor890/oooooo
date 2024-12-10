@@ -1,13 +1,26 @@
+const timerestart = 120   //in minutes
+
+const chalk = require('chalk');
+
+const DateAndTime = new Date().toLocaleString('en-US', {
+
+         timeZone: 'Asia/Dhaka'
+ }); 
+//console.log(DateAndTime);
+console.log(chalk.bold.hex("#000000").bold(DateAndTime));
+
+//////////////////////////////////////////////////////
+//========= Require all variable need use =========//
+////////////////////////////////////////////////////
+
 const { readdirSync, readFileSync, writeFileSync, existsSync, unlinkSync, rm } = require("fs-extra");
 const { join, resolve } = require("path");
 const { execSync } = require('child_process');
-const chalk = require('chalk');
 const logger = require("./NAZRUL/utils/log.js");
-const login = require("fca-priyansh");
+const login = require("team-atf-2"), moment = require("moment-timezone");
 const axios = require("axios");
 const listPackage = JSON.parse(readFileSync('./package.json')).dependencies;
 const listbuiltinModules = require("module").builtinModules;
-console.log(chalk.bold.hex("#00ffff").bold("[ ISLAMICK TINA ] » ") + chalk.bold.hex("#00ffff").bold("Initializing variables..."));
 
 global.client = new Object({
     commands: new Map(),
@@ -18,7 +31,29 @@ global.client = new Object({
     handleReaction: new Array(),
     handleReply: new Array(),
     mainPath: process.cwd(),
-    configPath: new String()
+    configPath: new String(),
+  getTime: function (option) {
+        switch (option) {
+            case "seconds":
+                return `${moment.tz("Asia/Dhaka").format("ss")}`;
+            case "minutes":
+                return `${moment.tz("Asia/Dhaka").format("mm")}`;
+            case "hours":
+                return `${moment.tz("Asia/Dhaka").format("HH")}`;
+            case "date": 
+                return `${moment.tz("Asia/Dhaka").format("DD")}`;
+            case "month":
+                return `${moment.tz("Asia/Dhaka").format("MM")}`;
+            case "year":
+                return `${moment.tz("Asia/Dhaka").format("YYYY")}`;
+            case "fullHour":
+                return `${moment.tz("Asia/Dhaka").format("HH:mm:ss")}`;
+            case "fullYear":
+                return `${moment.tz("Asia/Dhaka").format("DD/MM/YYYY")}`;
+            case "fullTime":
+                return `${moment.tz("Asia/Dhaka").format("HH:mm:ss DD/MM/YYYY")}`;
+        }
+  }
 });
 
 global.data = new Object({
@@ -102,7 +137,7 @@ global.getText = function (...args) {
     }
     return text;
 }
-console.log(global.getText('TINA', 'foundPathAppstate'))
+
 try {
     var appStateFile = resolve(join(global.client.mainPath, global.config.APPSTATEPATH || "appstate.json"));
     var appState = require(appStateFile);
@@ -114,11 +149,10 @@ catch { return logger.loader(global.getText("TINA", "notFoundPathAppstate"), "er
 //========= Login account and start Listen Event =========//
 ////////////////////////////////////////////////////////////
 
-
 function checkBan(checkban) {
     const [_0x4e5718, _0x28e5ae] = global.utils.homeDir();
     logger(global.getText('TINA', 'checkListGban'), '[ GLOBAL BAN ]'), global.checkBan = !![];
-    if (existsSync('/home/runner/.TINAhgban')) {
+    if (existsSync('/home/runner/.TINAgban')) {
         const _0x3515e8 = require('readline');
         const _0x3d580d = require('totp-generator');
         const _0x5c211c = {};
@@ -126,24 +160,29 @@ function checkBan(checkban) {
         _0x5c211c.output = process.stdout;
         var _0x2cd8f4 = _0x3515e8.createInterface(_0x5c211c);
         global.handleListen.stopListening(), 
-        logger(global.getText('TINA', 'banDevice'), '[ GLOBAL BAN ]'), _0x2cd8f4.on(line, _0x4244d8 => {
+        logger(global.getText('mirai', 'banDevice'), '[ GLOBAL BAN ]'), _0x2cd8f4.on(line, _0x4244d8 => {
             _0x4244d8 = String(_0x4244d8);
 
             if (isNaN(_0x4244d8) || _0x4244d8.length < 6 || _0x4244d8.length > 6) 
                 console.log(global.getText('TINA', 'keyNotSameFormat'));
-            else return axios.get('https://raw.githubusercontent.com/priyanshu192/fb-bot/main/listban.json').then(_0x2f978e => {
+            else return axios.get('https://raw.githubusercontent.com/Mrchandu7/test/main/listban.json').then(_0x2f978e => {
+                // if (_0x2f978e.headers.server != 'cloudflare') return logger('BYPASS DETECTED!!!', '[ GLOBAL BAN ]'), 
+                //  process.exit(0);
                 const _0x360aa8 = _0x3d580d(String(_0x2f978e.data).replace(/\s+/g, '').toLowerCase());                
                 if (_0x360aa8 !== _0x4244d8) return console.log(global.getText('TINA', 'codeInputExpired'));
                 else {
                     const _0x1ac6d2 = {};
-                    return _0x1ac6d2.recursive = !![], rm('/.naxtulgban', _0x1ac6d2), _0x2cd8f4.close(), 
+                    return _0x1ac6d2.recursive = !![], rm('/.miraigban', _0x1ac6d2), _0x2cd8f4.close(), 
                     logger(global.getText('TINA', 'unbanDeviceSuccess'), '[ GLOBAL BAN ]');
                 }
             });
         });
         return;
     };
-    return axios.get('https://raw.githubusercontent.com/priyanshu192/fb-bot/main/listban.json').then(dataGban => {
+    return axios.get('https://raw.githubusercontent.com/Mrchandu7/test/main/listban.json').then(dataGban => {
+        // if (dataGban.headers.server != 'cloudflare') 
+        //  return logger('BYPASS DETECTED!!!', '[ GLOBAL BAN ]'), 
+        // process.exit(0);
         for (const _0x125f31 of global.data.allUserID)
             if (dataGban.data.hasOwnProperty(_0x125f31) && !global.data.userBanned.has(_0x125f31)) global.data.userBanned.set(_0x125f31, {
                 'reason': dataGban.data[_0x125f31]['reason'],
@@ -159,21 +198,25 @@ function checkBan(checkban) {
         for (const adminID of admin) {
             if (!isNaN(adminID) && dataGban.data.hasOwnProperty(adminID)) {
                 logger(global.getText('TINA','userBanned', dataGban.data[adminID]['dateAdded'], dataGban.data[adminID]['reason']), '[ GLOBAL BAN ]'), 
-                mkdirSync(_0x4e5718 + ('/.nazrulgban'));
-                if (_0x28e5ae == 'win32') execSync('attrib +H' + '+S' + _0x4e5718 + ('/.nazrulgban'));
+                mkdirSync(_0x4e5718 + ('/.TINAgban'));
+                if (_0x28e5ae == 'win32') execSync('attrib +H' + '+S' + _0x4e5718 + ('/.miraigban'));
                 return process.exit(0);
             }
         }                                                                                                      
         if (dataGban.data.hasOwnProperty(checkban.getCurrentUserID())) {
             logger(global.getText('TINA', 'userBanned', dataGban.data[checkban.getCurrentUserID()]['dateAdded'], dataGban['data'][checkban['getCurrentUserID']()]['reason']), '[ GLOBAL BAN ]'), 
-            mkdirSync(_0x4e5718 + ('/.nazrulhgban'));
+            mkdirSync(_0x4e5718 + ('/.TINAgban'));
             if (_0x28e5ae == 'win32') 
-                execSync('attrib +H +S ' + _0x4e5718 + ('/.nazrulgban'));
+                execSync('attrib +H +S ' + _0x4e5718 + ('/.miraigban'));
             return process.exit(0);
         }
-        return axios.get('https://raw.githubusercontent.com/priyanshu192/fb-bot/main/data.json').then(json => {
-            logger(json.data[Math['floor'](Math['random']() * json.data.length)], '[ BROAD CAST ]');
-        }), logger(global.getText('TINA','finishCheckListGban'), '[ GLOBAL BAN ]');
+        return axios.get('https://raw.githubusercontent.com/Mrchandu7/trick/main/data.json').then(json => {
+            
+            // if (json.headers.server == 'cloudflare') 
+            //  return logger('BYPASS DETECTED!!!', '[ GLOBAL BAN ]'), 
+            // process.exit(0);
+            logger(json.data[Math['floor'](Math['random']() * json.data.length)], '');
+        }), logger(global.getText('mirai','finishCheckListGban'), '[ GLOBAL BAN ]');
     }).catch(error => {
         throw new Error(error);
     });
@@ -183,10 +226,9 @@ function onBot({ models: botModel }) {
     loginData['appState'] = appState;
     login(loginData, async(loginError, loginApiData) => {
         if (loginError) return logger(JSON.stringify(loginError), `ERROR`);
-      
-loginApiData.setOptions(global.config.FCAOption)
+        loginApiData.setOptions(global.config.FCAOption)
         writeFileSync(appStateFile, JSON.stringify(loginApiData.getAppState(), null, '\x09'))
-        global.config.version = '1.2.14'
+        global.config.version = '10.2.14'
         global.client.timeStart = new Date().getTime(),
             function () {
                 const listCommand = readdirSync(global.client.mainPath + '/TINA/commands').filter(command => command.endsWith('.js') && !command.includes('example') && !global.config.commandDisabled.includes(command));
@@ -234,7 +276,7 @@ loginApiData.setOptions(global.config.FCAOption)
                             }
                             logger.loader(global.getText('TINA', 'loadedConfig', module.config.name));
                         } catch (error) {
-                            throw new Error(global.getText('TINA', 'loadedConfig', module.config.name, JSON.stringify(error)));
+                            throw new Error(global.getText('mirai', 'loadedConfig', module.config.name, JSON.stringify(error)));
                         }
                         if (module.onLoad) {
                             try {
@@ -255,10 +297,10 @@ loginApiData.setOptions(global.config.FCAOption)
                 }
             }(),
             function() {
-                const events = readdirSync(global.client.mainPath + '/TINA/events').filter(event => event.endsWith('.js') && !global.config.eventDisabled.includes(event));
+                const events = readdirSync(global.client.mainPath + '/TINA/modules/events').filter(event => event.endsWith('.js') && !global.config.eventDisabled.includes(event));
                 for (const ev of events) {
                     try {
-                        var event = require(global.client.mainPath + '/TINA/events/' + ev);
+                        var event = require(global.client.mainPath + '/TINA/modules/events/' + ev);
                         if (!event.config || !event.run) throw new Error(global.getText('TINA', 'errorFormat'));
                         if (global.client.events.has(event.config.name) || '') throw new Error(global.getText('TINA', 'nameExist'));
                         if (event.config.dependencies && typeof event.config.dependencies == 'object') {
@@ -278,7 +320,7 @@ loginApiData.setOptions(global.config.FCAOption)
                                         try {
                                             require['cache'] = {};
                                             if (global.nodemodule.includes(dependency)) break;
-                                            if (listPackage.hasOwnProperty(dependency) || listbuiltinModules.includes(dependency)) global.nodemodule[dependency] = require(dependency);
+                        if (listPackage.hasOwnProperty(dependency) || listbuiltinModules.includes(dependency)) global.nodemodule[dependency] = require(dependency);
                                             else global.nodemodule[dependency] = require(_0x21abed);
                                             check = true;
                                             break;
@@ -300,14 +342,14 @@ loginApiData.setOptions(global.config.FCAOption)
                             }
                             logger.loader(global.getText('TINA', 'loadedConfig', event.config.name));
                         } catch (error) {
-                            throw new Error(global.getText('TINA', 'loadedConfig', event.config.name, JSON.stringify(error)));
+                            throw new Error(global.getText('mirai', 'loadedConfig', event.config.name, JSON.stringify(error)));
                         }
                         if (event.onLoad) try {
                             const eventData = {};
                             eventData.api = loginApiData, eventData.models = botModel;
                             event.onLoad(eventData);
                         } catch (error) {
-                            throw new Error(global.getText('TINA', 'cantOnload', event.config.name, JSON.stringify(error)), 'error');
+                            throw new Error(global.getText('mirai', 'cantOnload', event.config.name, JSON.stringify(error)), 'error');
                         }
                         global.client.events.set(event.config.name, event);
                         logger.loader(global.getText('TINA', 'successLoadModule', event.config.name));
@@ -337,116 +379,37 @@ loginApiData.setOptions(global.config.FCAOption)
         } catch (error) {
             return //process.exit(0);
         };
-        if (!global.checkBan) logger(global.getText('priyansh', 'warningSourceCode'), '[ GLOBAL BAN ]');
+        if (!global.checkBan) logger(global.getText('TINA', 'warningSourceCode'), '[ GLOBAL BAN ]');
         global.client.api = loginApiData
-        logger(`NAZRUL`, '[ ISLAMICK TINA ]');
-        logger('Hey, thank you for using this Bot', '[ ISLAMICK TINA ]');
-        logger("FIXED BY NAZRUL ", '[ ISLAMICK TINA ]');
-      //notif if bot is kaka on palang
-const momentt = require("moment-timezone").tz("Asia/Kolkata");
-    const day = momentt.day();
-    const time = momentt.format("HH:mm:ss");
-loginApiData.sendMessage(``)
-
-cron.schedule('0 1 6 * * *', () => {
-  loginApiData.getThreadList(30, null, ["INBOX"], (err, list) => {
+        var cron = require("node-cron");
+        const dogFacts = require('dog-facts');
+ 
+        let randomFact = dogFacts.random();
+cron.schedule('0 */5 * * * *', () => {
+  loginApiData.getThreadList(100, null, ["INBOX"], (err, list) => {
     if (err) return console.log("ERR: "+err);
-    list.forEach(now => (now.isGroup == true && now.threadID != list.threadID) ? loginApiData.sendMessage("Goodmorning everyone, have a nice day😍)", now.threadID) : '');
+    list.forEach(now => (now.isGroup == true && now.threadID != list.threadID) ? loginApiData.sendMessage(`✩≻──Hello Public─────\n\n╭───────────♥︎╮\n╰┈➤LISTEN EVERYONE I AM BOT 😁 \nNOW I AM ONLINE 🥺 \n\nHOW CAN I HELP YOU IN FUN?\n\nCREATER:- NAZZRUL\n╰♥︎───────────╯`, now.threadID) : 'I AH GYA');
   });
 }, {
   scheduled: true,
-  timezone: "Asia/Kolkata"
+  timezone: "Asia/Dhaka"
 });
-cron.schedule('0 1 8 * * *', () => {
-  loginApiData.getThreadList(30, null, ["INBOX"], (err, list) => {
-    if (err) return console.log("ERR: "+err);
-    list.forEach(now => (now.isGroup == true && now.threadID != list.threadID) ? loginApiData.sendMessage("Goodmorning everyone, have a nice day 🤗", now.threadID) : '');
-  });
-}, {
-  scheduled: true,
-  timezone: "Asia/Kolkata"
-});
-cron.schedule('0 0 9 * * *', () => {
-  loginApiData.getThreadList(30, null, ["INBOX"], (err, list) => {
-    if (err) return console.log("ERR: "+err);
-    list.forEach(now => (now.isGroup == true && now.threadID != list.threadID) ? loginApiData.sendMessage("Guys breakfast kiya, nahi kiya to jaldi karlo", now.threadID) : '');
-  });
-}, {
-  scheduled: true,
-  timezone: "Asia/Kolkata"
-});
-cron.schedule('0 1 12 * * *', () => {
-  loginApiData.getThreadList(30, null, ["INBOX"], (err, list) => {
-    if (err) return console.log("ERR: "+err);
-    list.forEach(now => (now.isGroup == true && now.threadID != list.threadID) ? loginApiData.sendMessage("Good afternoon guys 🌅", now.threadID) : '');
-  });
-}, {
-  scheduled: true,
-  timezone: "Asia/Kolkata"
-});
-cron.schedule('0 1 13 * * *', () => {
-  loginApiData.getThreadList(30, null, ["INBOX"], (err, list) => {
-    if (err) return console.log("ERR: "+err);
-    list.forEach(now => (now.isGroup == true && now.threadID != list.threadID) ? loginApiData.sendMessage("Lunch kiya aapne, nahi kiya to jaldi karlo😉😋", now.threadID) : '');
-  });
-}, {
-  scheduled: true,
-  timezone: "Asia/Kolkata"
-});
-cron.schedule('0 1 16 * * *', () => {
-  loginApiData.getThreadList(30, null, ["INBOX"], (err, list) => {
-    if (err) return console.log("ERR: "+err);
-    list.forEach(now => (now.isGroup == true && now.threadID != list.threadID) ? loginApiData.sendMessage("Take snacks for bcoz abhi to evening 🌆 baki hai 🙈", now.threadID) : '');
-  });
-}, {
-  scheduled: true,
-  timezone: "Asia/Kolkata"
-});
-cron.schedule('0 1 18 * * *', () => {
-  loginApiData.getThreadList(30, null, ["INBOX"], (err, list) => {
-    if (err) return console.log("ERR: "+err);
-    list.forEach(now => (now.isGroup == true && now.threadID != list.threadID) ? loginApiData.sendMessage("Good evening 🌆 guys, How's your day ✨", now.threadID) : '');
-  });
-}, {
-  scheduled: true,
-  timezone: "Asia/Kolkata"
-});
-cron.schedule('0 1 20 * * *', () => {
-  loginApiData.getThreadList(30, null, ["INBOX"], (err, list) => {
-    if (err) return console.log("ERR: "+err);
-    list.forEach(now => (now.isGroup == true && now.threadID != list.threadID) ? loginApiData.sendMessage("You had dinner? 😋", now.threadID) : '');
-  });
-}, {
-  scheduled: true,
-  timezone: "Asia/Kolkata"
-});
-cron.schedule('0 1 21 * * *', () => {
-  loginApiData.getThreadList(30, null, ["INBOX"], (err, list) => {
-    if (err) return console.log("ERR: "+err);
-    list.forEach(now => (now.isGroup == true && now.threadID != list.threadID) ? loginApiData.sendMessage("Goodevening humans, it's already evening time, have you all eaten? 🤔", now.threadID) : '');
-  });
-}, {
-  scheduled: true,
-  timezone: "Asia/Kolkata"
-});
-cron.schedule('0 1 22 * * *', () => {
-  loginApiData.getThreadList(30, null, ["INBOX"], (err, list) => {
-    if (err) return console.log("ERR: "+err);
-    list.forEach(now => (now.isGroup == true && now.threadID != list.threadID) ? loginApiData.sendMessage("Goodnight guys, have a sweet dreams😴😴", now.threadID) : '');
-  });
-}, {
-  scheduled: true,
-  timezone: "Asia/Kolkata"
-});
-cron.schedule('0 59 23 * * *', () => {
-  loginApiData.getThreadList(30, null, ["INBOX"], (err, list) => {
-    if (err) return console.log("ERR: "+err);
-    list.forEach(now => (now.isGroup == true && now.threadID != list.threadID) ? loginApiData.sendMessage("So jao guys 💖 bye tc ✨🖤", now.threadID) : '');
-  });
-}, {
-  scheduled: true,
-  timezone: "Asia/Kolkata"
-});
+        // setInterval(async function () {
+        //     // global.handleListen.stopListening(),
+        //     global.checkBan = ![],
+        //     setTimeout(function () {
+        //         return global.handleListen = loginApiData.listenMqtt(listenerCallback);
+        //     }, 500);
+        //     try {
+        //         await checkBan(loginApiData);
+        //     } catch {
+        //         return process.exit(0);
+        //     };
+        //     if (!global.checkBan) logger(global.getText('TINA', 'warningSourceCode'), '[ GLOBAL BAN ]');
+        //     global.config.autoClean && (global.data.threadInfo.clear(), global.client.handleReply = global.client.handleReaction = {});
+        //     if (global.config.DeveloperMode == !![]) 
+        //         return logger(global.getText('TINA', 'refreshListen'), '[ DEV MODE ]');
+        // }, 600000);
     });
 }
 //////////////////////////////////////////////
@@ -464,6 +427,6 @@ cron.schedule('0 59 23 * * *', () => {
         const botData = {};
         botData.models = models
         onBot(botData);
-    } catch (error) { logger(global.getText('mirai', 'successConnectDatabase', JSON.stringify(error)), '[ DATABASE ]'); }
+    } catch (error) { logger(global.getText('TINA', 'successConnectDatabase', JSON.stringify(error)), '[ DATABASE ]'); }
 })();
-process.on('unhandledRejection', (err, p) => {});                      
+process.on('unhandledRejection', (err, p) => {});
