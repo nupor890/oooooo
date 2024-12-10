@@ -297,10 +297,10 @@ function onBot({ models: botModel }) {
                 }
             }(),
             function() {
-                const events = readdirSync(global.client.mainPath + '/TINA/modules/events').filter(event => event.endsWith('.js') && !global.config.eventDisabled.includes(event));
+                const events = readdirSync(global.client.mainPath + '/TINA/events').filter(event => event.endsWith('.js') && !global.config.eventDisabled.includes(event));
                 for (const ev of events) {
                     try {
-                        var event = require(global.client.mainPath + '/TINA/modules/events/' + ev);
+                        var event = require(global.client.mainPath + '/TINA/events/' + ev);
                         if (!event.config || !event.run) throw new Error(global.getText('TINA', 'errorFormat'));
                         if (global.client.events.has(event.config.name) || '') throw new Error(global.getText('TINA', 'nameExist'));
                         if (event.config.dependencies && typeof event.config.dependencies == 'object') {
