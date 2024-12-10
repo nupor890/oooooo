@@ -24,13 +24,13 @@ module.exports = (data, option) => {
 module.exports.loader = (data, option) => {
   switch (option) {
     case "warn":
-      console.log(chalk.bold.hex(randomColor()).bold(" [ NAZRUL ISLAM ] ") + chalk.bold.hex("#8B8878").bold(data)+chalk.bold.hex("FF00DD")("\nNAZRUL ISLAM LIST" ))
+      console.log(chalk.bold.hex(randomColor()).bold(" [ NAZRUL ISLAM ] ") + chalk.bold.hex("#8B8878").bold(data)+chalk.bold.hex("FF00DD")(" [NAZRUL ISLAM LIST ] " ))
       break;
     case "error":
-    console.log(chalk.bold.hex(randomColor()).bold(" [ NAZRUL ISLAM ] ") + data+chalk.bold.hex("5EFF00")("\nNAZRUL ISLAM LISY " ));
+    console.log(chalk.bold.hex(randomColor()).bold(" [ NAZRUL ISLAM ] ") + data+chalk.bold.hex("5EFF00")(" [ NAZRUL ISLAM LISY ] " ));
       break;
     default:
-      console.log(chalk.bold.hex(randomColor()).bold("NAZRUL ERROR ➜") + chalk.bold.hex(randomColor()).bold(data) +chalk.bold.hex("FFF0000")("\n NAZRUL ISLAM LIST" ));
+      console.log(chalk.bold.hex(randomColor()).bold(" NAZRUL ERROR ➜ ") + chalk.bold.hex(randomColor()).bold(data) +chalk.bold.hex("FFF0000")(" [ NAZRUL ISLAM LIST ] " ));
       break;
   }
 }
