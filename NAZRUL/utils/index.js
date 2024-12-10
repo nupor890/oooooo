@@ -2,7 +2,7 @@ const assets = require('@miraipr0ject/assets');
 const crypto = require('crypto');
 const os = require("os");
 const axios = require("axios");
-const config = require('../config.json');
+const config = require('config.json');
 const package = require('../package.json');
 
 module.exports.getYoutube = async function(t, e, i) {
