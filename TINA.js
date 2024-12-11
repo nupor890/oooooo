@@ -2,7 +2,7 @@ const { readdirSync, readFileSync, writeFileSync, existsSync, unlinkSync, rm } =
 const { join, resolve } = require("path");
 const { execSync } = require('child_process');
 const chalk = require('chalk');
-const logger = require("./NAZRUL/utils/log.js");
+const logger = require("./utils/log.js");
 const login = require("fca-priyansh");
 const axios = require("axios");
 const listPackage = JSON.parse(readFileSync('./package.json')).dependencies;
@@ -34,7 +34,7 @@ global.data = new Object({
     allThreadID: new Array()
 });
 
-global.utils = require("./NAZRUL/utils");
+global.utils = require("./utils");
 
 global.nodemodule = new Object();
 
