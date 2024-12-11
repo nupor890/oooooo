@@ -341,7 +341,7 @@ loginApiData.setOptions(global.config.FCAOption)
         global.client.api = loginApiData
         logger(`PRIYANSH`, '[ PRIYANSH (RAJPUT) ]');
         logger('Hey, thank you for using this Bot', '[ PRIYANSH (RAJPUT) ]');
-        logger("FIXED BY NAZRUL '[ ISLAMICK CHAT ]');
+        logger("FIXED BY NAZRUL '[ ISLAMICK CHAT ]'");
       //notif if bot is kaka on palang
 const momentt = require("moment-timezone").tz("Asia/Dhaka");
     const day = momentt.day();
