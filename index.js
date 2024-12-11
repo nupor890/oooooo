@@ -1,6 +1,6 @@
 const { spawn } = require("child_process");
 const axios = require("axios");
-const logger = require("./NAZRUL/utils/log");
+const logger = require("./utils/log");
 
 ///////////////////////////////////////////////////////////
 //========= Create website for dashboard/uptime =========//
