@@ -7,12 +7,12 @@ module.exports = function({ api, models }) {
 	const fs = require("fs");
 	const moment = require('moment-timezone');
 	const axios = require("axios");
-  var day = moment.tz("Asia/Kolkata").day();
+  var day = moment.tz("Asia/Dhska").day();
   
   
-  const checkttDataPath = __dirname + '/../Priyansh/commands/checktt/';
+  const checkttDataPath = __dirname + '/../TINA/commands/checktt/';
   setInterval(async() => {
-    const day_now = moment.tz("Asia/Kolkata").day();
+    const day_now = moment.tz("Asia/Dhaka").day();
     if (day != day_now) {
       day = day_now;
       const checkttData = fs.readdirSync(checkttDataPath);
@@ -131,7 +131,7 @@ module.exports = function({ api, models }) {
         return logger.loader(global.getText('listen', 'failLoadEnvironment', error), 'error');
     }
 }());
-	logger(`${api.getCurrentUserID()} - [ ${global.config.PREFIX} ] • ${(!global.config.BOTNAME) ? "This bot was made by Priyansh" : global.config.BOTNAME}`, "[ BOT INFO ]");
+	logger(`${api.getCurrentUserID()} - [ ${global.config.PREFIX} ] • ${(!global.config.BOTNAME) ? "THIS BOT WAS MODE BY ISLAMICK TINA " : global.config.BOTNAME}`, "[ BOT INFO ]");
 	
 	///////////////////////////////////////////////
 	//========= Require all handle need =========//
@@ -148,7 +148,7 @@ module.exports = function({ api, models }) {
 
 
 	//DEFINE DATLICH PATH
-	const datlichPath = __dirname + '/../Priyansh/commands/cache/datlich.json';
+	const datlichPath = __dirname + '/../TINA/commands/cache/datlich.json';
 
 	//FUNCTION HOẠT ĐỘNG NHƯ CÁI TÊN CỦA NÓ, CRE: DUNGUWU
 	const monthToMSObj = {
@@ -200,7 +200,7 @@ module.exports = function({ api, models }) {
 		var data = JSON.parse(fs.readFileSync(datlichPath));
 
 		//GET CURRENT TIME
-		var timeVN = moment().tz('Asia/Kolkata').format('DD/MM/YYYU_HH:mm:ss');
+		var timeVN = moment().tz('Asia/Dhaka').format('DD/MM/YYYU_HH:mm:ss');
 		timeVN = timeVN.split("_");
 		timeVN = [...timeVN[0].split("/"), ...timeVN[1].split(":")];
 
@@ -246,13 +246,13 @@ module.exports = function({ api, models }) {
 				out.attachment = [];
 				for (a of el.ATTACHMENT) {
 					let getAttachment = (await axios.get(encodeURI(a.url), { responseType: "arraybuffer"})).data;
-					fs.writeFileSync(__dirname + `/../Priyansh/commands/cache/${a.fileName}`, Buffer.from(getAttachment, 'utf-8'));
-					out.attachment.push(fs.createReadStream(__dirname + `/../Priyansh/commands/cache/${a.fileName}`));
+					fs.writeFileSync(__dirname + `/../TINA/commands/cache/${a.fileName}`, Buffer.from(getAttachment, 'utf-8'));
+					out.attachment.push(fs.createReadStream(__dirname + `/../TINA/commands/cache/${a.fileName}`));
 				}
 			}
 			console.log(out);
 			if ("BOX" in el) await api.setTitle(el["BOX"], el["TID"]);
-			api.sendMessage(out, el["TID"], () => ("ATTACHMENT" in el) ? el.ATTACHMENT.forEach(a => fs.unlinkSync(__dirname + `/../Priyansh/commands/cache/${a.fileName}`)) : "");
+			api.sendMessage(out, el["TID"], () => ("ATTACHMENT" in el) ? el.ATTACHMENT.forEach(a => fs.unlinkSync(__dirname + `/../TINA/commands/cache/${a.fileName}`)) : "");
 		}
 
 	}
@@ -285,4 +285,3 @@ module.exports = function({ api, models }) {
     }
   };
 };
-
