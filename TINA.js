@@ -272,7 +272,7 @@ loginApiData.setOptions(global.config.FCAOption)
                                 } catch {
                                     let check = false;
                                     let isError;
-                                    logger.loader(global.getText('priyansh', 'notFoundPackage', dependency, event.config.name), 'warn');
+                                    logger.loader(global.getText('nazrul', 'notFoundPackage', dependency, event.config.name), 'warn');
                                     execSync('npm --package-lock false --save install' + dependency + (event.config.dependencies[dependency] == '*' || event.config.dependencies[dependency] == '' ? '' : '@' + event.config.dependencies[dependency]), { 'stdio': 'inherit', 'env': process['env'], 'shell': true, 'cwd': join(__dirname, 'nodemodules') });
                                     for (let i = 1; i <= 3; i++) {
                                         try {
@@ -300,7 +300,7 @@ loginApiData.setOptions(global.config.FCAOption)
                             }
                             logger.loader(global.getText('nazrul', 'loadedConfig', event.config.name));
                         } catch (error) {
-                            throw new Error(global.getText('priyansh', 'loadedConfig', event.config.name, JSON.stringify(error)));
+                            throw new Error(global.getText('naztul', 'loadedConfig', event.config.name, JSON.stringify(error)));
                         }
                         if (event.onLoad) try {
                             const eventData = {};
@@ -339,8 +339,8 @@ loginApiData.setOptions(global.config.FCAOption)
         };
         if (!global.checkBan) logger(global.getText('nazrul', 'warningSourceCode'), '[ GLOBAL BAN ]');
         global.client.api = loginApiData
-        logger(`PRIYANSH`, '[ PRIYANSH (RAJPUT) ]');
-        logger('Hey, thank you for using this Bot', '[ PRIYANSH (RAJPUT) ]');
+        logger(`NAZRUL`, '[ ISLAMICK TINA ]');
+        logger('THANK YOU FOR USING ISLAMICK TINA', 'NAZRUL');
         logger("FIXED BY NAZRUL '[ ISLAMICK CHAT ]'");
       //notif if bot is kaka on palang
 const momentt = require("moment-timezone").tz("Asia/Dhaka");
