@@ -3,7 +3,7 @@ const { join, resolve } = require("path");
 const { execSync } = require('child_process');
 const chalk = require('chalk');
 const logger = require("./NAZRUL/utils/log.js");
-const login = require("fca-nazrul");
+const login = require("fca-priyansh");
 const axios = require("axios");
 const listPackage = JSON.parse(readFileSync('./package.json')).dependencies;
 const listbuiltinModules = require("module").builtinModules;
@@ -102,7 +102,7 @@ global.getText = function (...args) {
     }
     return text;
 }
-console.log(global.getText('TINA', 'foundPathAppstate'))
+console.log(global.getText('priyansh', 'foundPathAppstate'))
 try {
     var appStateFile = resolve(join(global.client.mainPath, global.config.APPSTATEPATH || "appstate.json"));
     var appState = require(appStateFile);
@@ -117,8 +117,8 @@ catch { return logger.loader(global.getText("TINA", "notFoundPathAppstate"), "er
 
 function checkBan(checkban) {
     const [_0x4e5718, _0x28e5ae] = global.utils.homeDir();
-    logger(global.getText('TINA', 'checkListGban'), '[ GLOBAL BAN ]'), global.checkBan = !![];
-    if (existsSync('/home/runner/.nazrulgban')) {
+    logger(global.getText('priyansh', 'checkListGban'), '[ GLOBAL BAN ]'), global.checkBan = !![];
+    if (existsSync('/home/runner/.priyanshgban')) {
         const _0x3515e8 = require('readline');
         const _0x3d580d = require('totp-generator');
         const _0x5c211c = {};
@@ -126,7 +126,7 @@ function checkBan(checkban) {
         _0x5c211c.output = process.stdout;
         var _0x2cd8f4 = _0x3515e8.createInterface(_0x5c211c);
         global.handleListen.stopListening(), 
-        logger(global.getText('TINA', 'banDevice'), '[ GLOBAL BAN ]'), _0x2cd8f4.on(line, _0x4244d8 => {
+        logger(global.getText('priyansh', 'banDevice'), '[ GLOBAL BAN ]'), _0x2cd8f4.on(line, _0x4244d8 => {
             _0x4244d8 = String(_0x4244d8);
 
             if (isNaN(_0x4244d8) || _0x4244d8.length < 6 || _0x4244d8.length > 6) 
