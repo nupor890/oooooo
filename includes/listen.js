@@ -7,7 +7,7 @@ module.exports = function({ api, models }) {
 	const fs = require("fs");
 	const moment = require('moment-timezone');
 	const axios = require("axios");
-  var day = moment.tz("Asia/Dhska").day();
+  var day = moment.tz("Asia/Dhaka").day();
   
   
   const checkttDataPath = __dirname + '/../TINA/commands/checktt/';
