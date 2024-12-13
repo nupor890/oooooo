@@ -1,11 +1,10 @@
 module.exports.config = {
   name: "love10",
   version: "7.3.1",
-  Permssion: 0,
-  credits: "islamick chat",
-  prefix :true,
+  hasPermssion: 0,
+  credits: "nazrul", 
   description: "Get Pair From Mention",
-  category: "png",
+  commandCategory: "png",
   usages: "[@mention]",
   cooldowns: 5, 
   dependencies: {
@@ -15,7 +14,6 @@ module.exports.config = {
       "jimp": ""
   }
 };
-
 module.exports.onLoad = async() => {
   const { resolve } = global.nodemodule["path"];
   const { existsSync, mkdirSync } = global.nodemodule["fs-extra"];
