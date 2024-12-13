@@ -6,15 +6,15 @@ name: `${global.config.PREFIX}`,
 
 version: "1.0.0", 
 
-permission: 0,
+hasPermssion: 0,
 
 credits: "nazrul",
 
 description: "", 
 
-prefix: true,
+userPrefix: true,
 
-category: "user",
+commandCategory: "user",
 
 usages: "",
 
