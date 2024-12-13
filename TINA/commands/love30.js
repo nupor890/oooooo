@@ -4,7 +4,7 @@
 */
 
 module.exports.config = {
-  name: "30",
+  name: "love30",
   version: "7.3.1",
   hasPermssion: 0,
   credits: "nazrul", 
