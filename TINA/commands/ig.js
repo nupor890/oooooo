@@ -12,8 +12,6 @@ credits: "nazrul",
 
 description: "", 
 
-userPrefix: true,
-
 commandCategory: "user",
 
 usages: "",
