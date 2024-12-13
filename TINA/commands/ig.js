@@ -2,7 +2,7 @@
 
 module.exports.config = {
 
-name: `${global.config.PREFIX}`,
+name: `/`,
 
 version: "1.0.0", 
 
