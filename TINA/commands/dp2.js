@@ -4,20 +4,19 @@
 */
 
 module.exports.config = {
-  name: "dp2", 
-  version: "1.0.0", 
-  permission: 0,
-  credits: "Nazrul",
-  description: "",
-  prefix: true,
-  category: "Love", 
-  usages: "love2 @", 
-  cooldowns: 5,
+  name: "love21",
+  version: "7.3.1",
+  hasPermssion: 0,
+  credits: "nazrul", 
+  description: "Get Pair From Mention",
+  commandCategory: "png",
+  usages: "[@mention]",
+  cooldowns: 5, 
   dependencies: {
-        "axios": "",
-        "fs-extra": "",
-        "path": "",
-        "jimp": ""
+      "axios": "",
+      "fs-extra": "",
+      "path": "",
+      "jimp": ""
     }
 };
 
