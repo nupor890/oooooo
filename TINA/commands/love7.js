@@ -6,11 +6,10 @@
 module.exports.config = {
     name: "love7",
     version: "2.0.0",
-    permssion: 2,
+    hasPermssion: 0,
     credits: "nazrul",
     description: "",
-    prefix: true,
-    category: "Love",
+    commandCategory: "Love",
     usages: "[tag]",
     cooldowns: 5,
     dependencies: {
