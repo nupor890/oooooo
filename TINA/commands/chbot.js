@@ -34,8 +34,8 @@ module.exports.run = async({api,event,args}) => {
              var nu = gendernu.length;
              let sex = threadInfo.approvalMode;
        var pd = sex == false ? "Turn off" : sex == true ? "turn on" : "NS";
-       if(!imgg) api.sendMessage(`Group name: ${threadInfo.threadName}\nTID: ${args[1]}\nApproved: ${pd}\nEmoji: ${threadInfo.emoji}\nInformation: \nÂ»${threadInfo.participantIDs.length} members and ${threadInfo.adminIDs.length} administrators.\nÂ»Including ${nam} boy and ${nu} female.\nÂ»Total number of messages: ${threadInfo.messageCount}.`,event.threadID,event.messageID);
-        else var callback = () => api.sendMessage({body:`Group name: ${threadInfo.threadName}\nTID: ${args[1]}\nApproved: ${pd}\nEmoji: ${threadInfo.emoji}\nInformation: \nÂ»${threadInfo.participantIDs.length} members and ${threadInfo.adminIDs.length}administrators.\nÂ»Including ${nam} boy and ${nu} female.\nÂ»Total number of messages: ${threadInfo.messageCount}.`,attachment: fs.createReadStream(__dirname + "/cache/1.png")}, event.threadID, () => fs.unlinkSync(__dirname + "/cache/1.png"), event.messageID); 
+       if(!imgg) api.sendMessage(`Group name: ${threadInfo.threadName}\nTID: ${args[1]}\nApproved: ${pd}\nEmoji: ${threadInfo.emoji}\nInformation: \n${threadInfo.participantIDs.length} members and ${threadInfo.adminIDs.length} administrators.\nIncluding ${nam} boy and ${nu} female.\nTotal number of messages: ${threadInfo.messageCount}.`,event.threadID,event.messageID);
+        else var callback = () => api.sendMessage({body:`Group name: ${threadInfo.threadName}\nTID: ${args[1]}\nApproved: ${pd}\nEmoji: ${threadInfo.emoji}\nInformation: \n${threadInfo.participantIDs.length} members and ${threadInfo.adminIDs.length}administrators.\nIncluding ${nam} boy and ${nu} female.\nTotal number of messages: ${threadInfo.messageCount}.`,attachment: fs.createReadStream(__dirname + "/cache/1.png")}, event.threadID, () => fs.unlinkSync(__dirname + "/cache/1.png"), event.messageID); 
       return request(encodeURI(`${threadInfo.imageSrc}`)).pipe(fs.createWriteStream(__dirname+'/cache/1.png')).on('close',() => callback());
       
       }
@@ -53,14 +53,14 @@ module.exports.run = async({api,event,args}) => {
              var nu = gendernu.length;
              let sex = threadInfo.approvalMode;
        var pd = sex == false ? "Turn off" : sex == true ? "turn on" : "NS";
-          if(!img) api.sendMessage(`Group name: ${threadInfo.threadName}\nTID: ${event.threadID}\nApproved: ${pd}\nEmoji: ${threadInfo.emoji}\nInformation: \nÂ»${threadInfo.participantIDs.length} members and ${threadInfo.adminIDs.length} administrators.\nÂ»Including ${nam} boy and ${nu} ná»¯.\nÂ»Total number of messages: ${threadInfo.messageCount}.`,event.threadID,event.messageID)
-          else  var callback = () => api.sendMessage({body:`Group name: ${threadInfo.threadName}\nTID: ${event.threadID}\nBrowser: ${pd}\nEmoji: ${threadInfo.emoji}\nInformation: \nÂ»${threadInfo.participantIDs.length} members and ${threadInfo.adminIDs.length} administrators.\nÂ»Including ${nam} boy and ${nu} female.\nÂ»Total number of messages: ${threadInfo.messageCount}.`,attachment: fs.createReadStream(__dirname + "/cache/1.png")}, event.threadID, () => fs.unlinkSync(__dirname + "/cache/1.png"), event.messageID);   
+          if(!img) api.sendMessage(`Group name: ${threadInfo.threadName}\nTID: ${event.threadID}\nApproved: ${pd}\nEmoji: ${threadInfo.emoji}\nInformation: \nÂ»${threadInfo.participantIDs.length} members and ${threadInfo.adminIDs.length} administrators.\nIncluding ${nam} boy and ${nu} \nTotal number of messages: ${threadInfo.messageCount}.`,event.threadID,event.messageID)
+          else  var callback = () => api.sendMessage({body:`Group name: ${threadInfo.threadName}\nTID: ${event.threadID}\nBrowser: ${pd}\nEmoji: ${threadInfo.emoji}\nInformation: \n${threadInfo.participantIDs.length} members and ${threadInfo.adminIDs.length} administrators.\nIncluding ${nam} boy and ${nu} female.\nTotal number of messages: ${threadInfo.messageCount}.`,attachment: fs.createReadStream(__dirname + "/cache/1.png")}, event.threadID, () => fs.unlinkSync(__dirname + "/cache/1.png"), event.messageID);   
       return request(encodeURI(`${threadInfo.imageSrc}`)).pipe(fs.createWriteStream(__dirname+'/cache/1.png')).on('close',() => callback());
     }
                if (args.length == 0) return api.sendMessage(`You can use:\n\n${prefix}${this.config.name} user => it will get your own information.\n\n${prefix}${this.config.name} user @[Tag] => it will get the information of the person you tag.\n\n${prefix}${this.config.name} box => it will get your box information (number of members, djt each other,...)\n\n${prefix}${this.config.name} user box [uid || tid]`, event.threadID, event.messageID);
     if (args[0] == "admin") {
       var callback = () => api.sendMessage(
-  {body:`𝗕𝗢𝗧 𝗡𝗔𝗠𝗘➢𝗜𝘀𝗹𝗮𝗺𝗶𝗰𝗸 𝗖𝗵𝗮𝘁\n𝗕𝗢𝗧 𝗣𝗥𝗘𝗙𝗜𝗫➢ ${global.config.BOTPREFIX} \n𝗠𝗜𝗡𝗘 𝗔𝗗𝗠𝗜𝗡➢𝗡𝗮𝘇𝗿𝘂𝗹\n𝗠𝗲𝘀𝘀𝗮𝗴𝗲https://m.me/ji.la.pi.6\n𝗧𝗵𝗮𝗻𝗸𝘀 𝗬𝗼𝘂 𝗙𝗼𝗿 𝗨𝘀𝗶𝗻𝗴  ${global.config.BOTNAME} 𝗕𝗼𝘁\n\n𝐂𝐫𝐞𝐚𝐭𝐨𝐫 ━➢ 𝐈𝐬𝐥𝐚𝐦𝐢𝐜𝐤 𝐂𝐡𝐚𝐭`,
+  {body:`𝗡𝗔𝗠𝗘➢ 𝗜𝘀𝗹𝗮𝗺𝗶𝗰𝗸 𝗖𝗵𝗮𝘁\n𝗕𝗢𝗧 𝗣𝗥𝗘𝗙𝗜𝗫➢  ${prefix} \n𝗠𝗜𝗡𝗘 𝗔𝗗𝗠𝗜𝗡➢ 𝗡𝗮𝘇𝗿𝘂𝗹\n𝗠𝗲𝘀𝘀𝗮𝗴𝗲➢ https ://m.me/ji.la.pi.6\n𝗧𝗵𝗮𝗻𝗸𝘀 𝗬𝗼𝘂 𝗙𝗼𝗿 𝗨𝘀𝗶𝗻𝗴  ${global.config.BOTNAME} 𝗕𝗼𝘁\n\n𝐂𝐫𝐞𝐚𝐭𝐨𝐫 ━➢ 𝐈𝐬𝐥𝐚𝐦𝐢𝐜𝐤 𝐂𝐡𝐚𝐭`,
     attachment: fs.createReadStream(__dirname + "/cache/1.png")}, event.threadID, () => 
     fs.unlinkSync(__dirname + "/cache/1.png"));  
       return request(encodeURI(`https://graph.facebook.com/100000350435589/picture?height=720&width=720&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`)).pipe(
@@ -79,7 +79,7 @@ if (args[0] == "user") {
     let name = await data[id].name;
     var sex = await data[id].gender;
     var gender = sex == 2 ? "Male" : sex == 1 ? "Female" : "Tran Duc Bo";
-    var callback = () => api.sendMessage({body:`𝗜𝗗 𝗡𝗔𝗠𝗘: ${name}` + `\n𝗙𝗔𝗖𝗘𝗕𝗢𝗢𝗞 𝗟𝗜𝗡𝗞: ${url}` + `\n𝗨𝗦𝗘𝗥 𝗡𝗔𝗠𝗘: ${sn}\n𝗨𝗜𝗗: ${id}\n𝗚𝗘𝗡𝗗𝗘𝗥: ${gender}\n𝗠𝗔𝗞𝗘 𝗙𝗥𝗜𝗘𝗡𝗗𝗦 𝗪𝗜𝗧𝗛 𝗕𝗢𝗧𝗦: ${b}`,attachment: fs.createReadStream(__dirname + "/cache/1.png")}, event.threadID, () => fs.unlinkSync(__dirname + "/cache/1.png"),event.messageID); 
+    var callback = () => api.sendMessage({body:`𝗜𝗗 𝗡𝗔𝗠𝗘: ${name}` + `\n𝗙𝗔𝗖𝗘𝗕𝗢𝗢𝗞 𝗟𝗜𝗡𝗞: https://www.facebook.com/profile.php?id=${id}` + `\n𝗨𝗦𝗘𝗥 𝗡𝗔𝗠𝗘: ${sn}\n𝗨𝗜𝗗: ${id}\n𝗚𝗘𝗡𝗗𝗘𝗥: ${gender}\n𝗠𝗔𝗞𝗘 𝗙𝗥𝗜𝗘𝗡𝗗𝗦 𝗪𝗜𝗧𝗛 𝗕𝗢𝗧𝗦: ${b}`,attachment: fs.createReadStream(__dirname + "/cache/1.png")}, event.threadID, () => fs.unlinkSync(__dirname + "/cache/1.png"),event.messageID); 
        return request(encodeURI(`https://graph.facebook.com/${id}/picture?height=720&width=720&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`)).pipe(fs.createWriteStream(__dirname+'/cache/1.png')).on('close',() => callback());
    }
     else {
@@ -93,7 +93,7 @@ if (args[0] == "user") {
     let name = await data[mentions].name;
     var sex = await data[mentions].gender;
     var gender = sex == 2 ? "Male" : sex == 1 ? "Female" : "Tran Duc Bo";
-    var callback = () => api.sendMessage({body:`𝗜𝗗 𝗡𝗔𝗠𝗘: ${name}` + `\n𝗙𝗔𝗖𝗘𝗕𝗢𝗢𝗞 𝗟𝗜𝗡𝗞: ${url}` + `\n𝗨𝗦𝗘𝗥𝗡𝗔𝗠𝗘: ${sn}\n𝗨𝗜𝗗: ${mentions}\n𝗦𝗘𝗫: ${gender}\n𝗠𝗔𝗞𝗘 𝗙𝗥𝗜𝗘𝗡𝗗𝗦 𝗪𝗜𝗧𝗛 𝗕𝗢𝗧𝗦: ${b}`,attachment: fs.createReadStream(__dirname + "/cache/1.png")}, event.threadID, () => fs.unlinkSync(__dirname + "/cache/1.png"),event.messageID);   
+    var callback = () => api.sendMessage({body:`𝗜𝗗 𝗡𝗔𝗠𝗘: ${name}` + `\n𝗙𝗔𝗖𝗘𝗕𝗢𝗢𝗞 𝗟𝗜𝗡𝗞: https://www.facebook.com/profile.php?id=${mentions}` + `\n𝗨𝗦𝗘𝗥𝗡𝗔𝗠𝗘: ${sn}\n𝗨𝗜𝗗: ${mentions}\n𝗦𝗘𝗫: ${gender}\n𝗠𝗔𝗞𝗘 𝗙𝗥𝗜𝗘𝗡𝗗𝗦 𝗪𝗜𝗧𝗛 𝗕𝗢𝗧𝗦: ${b}`,attachment: fs.createReadStream(__dirname + "/cache/1.png")}, event.threadID, () => fs.unlinkSync(__dirname + "/cache/1.png"),event.messageID);   
        return request(encodeURI(`https://graph.facebook.com/${mentions}/picture?height=720&width=720&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`)).pipe(fs.createWriteStream(__dirname+'/cache/1.png')).on('close',() => callback());
     }
     else {
@@ -104,7 +104,7 @@ if (args[0] == "user") {
     let name = await data[args[1]].name;
     var sex = await data[args[1]].gender;
     var gender = sex == 2 ? "Name" : sex == 1 ? "Female" : "Tran Duc Bo";
-    var callback = () => api.sendMessage({body:`𝗜𝗗 𝗡𝗔𝗠𝗘: ${name}` + `\n𝗙𝗔𝗖𝗘𝗕𝗢𝗢𝗞 𝗟𝗜𝗡𝗞: ${url}` + `\n𝗨𝗦𝗘𝗥𝗡𝗔𝗠𝗘: ${sn}\n𝗨𝗜𝗗: ${args[1]}\n𝗚𝗘𝗡𝗗𝗘𝗥: ${gender}\n𝗠𝗔𝗞𝗘 𝗙𝗥𝗜𝗘𝗡𝗗𝗦 𝗪𝗜𝗧𝗛 𝗕𝗢𝗧𝗦: ${b}`,attachment: fs.createReadStream(__dirname + "/cache/1.png")}, event.threadID, () => fs.unlinkSync(__dirname + "/cache/1.png"),event.messageID);   
+    var callback = () => api.sendMessage({body:`𝗜𝗗 𝗡𝗔𝗠𝗘: ${name}` + `\n𝗙𝗔𝗖𝗘𝗕𝗢𝗢𝗞 𝗟𝗜𝗡𝗞: https://www.facebook.com/profile.php?id=${args[1]}` + `\n𝗨𝗦𝗘𝗥𝗡𝗔𝗠𝗘: ${sn}\n𝗨𝗜𝗗: ${args[1]}\n𝗚𝗘𝗡𝗗𝗘𝗥: ${gender}\n𝗠𝗔𝗞𝗘 𝗙𝗥𝗜𝗘𝗡𝗗𝗦 𝗪𝗜𝗧𝗛 𝗕𝗢𝗧𝗦: ${b}`,attachment: fs.createReadStream(__dirname + "/cache/1.png")}, event.threadID, () => fs.unlinkSync(__dirname + "/cache/1.png"),event.messageID);   
        return request(encodeURI(`https://graph.facebook.com/${args[1]}/picture?height=720&width=720&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`)).pipe(fs.createWriteStream(__dirname+'/cache/1.png')).on('close',() => callback());
     }
      }
