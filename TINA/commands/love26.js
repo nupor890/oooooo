@@ -7,7 +7,7 @@ module.exports.config = {
   name: "love26",
   version: "7.3.1",
   hasPermssion: 0,
-  credits: "nazrul", 
+  credits: "nayan", 
   description: "Get Pair From Mention",
   commandCategory: "png",
   usages: "[@mention]",
