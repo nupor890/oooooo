@@ -76,7 +76,7 @@ module.exports.run = async function ({ event, api, args }) {
     if (!mention) return api.sendMessage("Please tag 1 person", threadID, messageID);
     else {
         var one = senderID, two = mention;
-        return makeImage({ one, two }).then(path => api.sendMessage({ body: "মাফ করে দিও। 🙏🙏\nঅপ্রিয় হয়ে বার বার প্রিয় হওয়ার চেষ্টা করছি\n𝐂𝐫𝐞𝐚𝐭𝐨𝐫 ━➢ 𝐈𝐬𝐥𝐚𝐦𝐢𝐜𝐤 𝐂𝐡𝐚𝐭',
+        return makeImage({ one, two }).then(path => api.sendMessage({ body: "মাফ করে দিও। 🙏🙏\nঅপ্রিয় হয়ে বার বার প্রিয় হওয়ার চেষ্টা করছি\n𝐂𝐫𝐞𝐚𝐭𝐨𝐫 ━➢ 𝐈𝐬𝐥𝐚𝐦𝐢𝐜𝐤 𝐂𝐡𝐚𝐭",
             mentions: [{
           tag: tag,
           id: mention
