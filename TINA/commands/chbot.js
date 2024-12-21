@@ -68,7 +68,7 @@ fs.createWriteStream(__dirname+'/cache/1.png')).on('close',() => callback());
     
       };
 
-if (args[0] == "user") { 
+if (args[0] == "stalk") { 
     if(!args[1]){
     if(event.type == "message_reply") id = event.messageReply.senderID
     else id = event.senderID;
