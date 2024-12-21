@@ -1,25 +1,22 @@
 const axios = require("axios");
-const fs = require("fs-extra");
-const tinyurl = require("tinyurl");
+const fs = require("fs");
+const path = require("path");
+
 const baseApiUrl = async () => {
   const base = await axios.get(
-    `https://www.noobs-api.rf.gd//Blankid018/D1PT0/main/baseApiUrl.json`,
+`https://raw.githubusercontent.com/Blankid018/D1PT0/main/baseApiUrl.json`
   );
   return base.data.api;
 };
 
 module.exports.config = {
-  name: "autolink",
-  version: "1.0.",
-  hasPermssion: 0,
+  name: "autodl",
+  version: "1.0.1",
   credits: "RAHAT",
+  countDown: 0,
+  hasPermssion: 0,
   description: "Fb Vid Downloader",
-  commandCategory: "other",
-  category: "others",
-  usags: "fb video link",
-  usePrefix: true,
-  prefix: true,
-  cooldowns: 2,
+  commandCategory: "𝗠𝗘𝗗𝗜𝗔",
   dependencies: {
     axios: "",
     "fs-extra": "",
@@ -27,85 +24,64 @@ module.exports.config = {
   },
 };
 
-module.exports.handleEvent = async function ({ api, event, client, __GLOBAL }) {
-  let dipto = event.body ? event.body : "";
+module.exports.run = async ({ bot, msg }) => {
+  this.onChat({ bot, msg });
+};
+
+module.exports.onChat = async ({ bot, msg }) => {
+  const messageText = msg.link_preview_options?.url || msg.text || "";
+
   try {
     if (
-      dipto.startsWith("https://vt.tiktok.com") ||
-      dipto.startsWith("https://vm.tiktok.com") ||
-      dipto.startsWith("https://www.facebook.com") ||
-      dipto.startsWith("https://fb.watch") ||
-      dipto.startsWith("https://www.tiktok.com/t/") ||
-      dipto.startsWith("https://www.capcut.com/t/") ||
-      dipto.startsWith("https://www.instagram.com/") ||
-      dipto.startsWith("https://youtu.be/") ||
-      dipto.startsWith("https://www.instagram.com/p/") ||
-      dipto.startsWith("https://pin.it/") ||
-      dipto.startsWith("https://youtube.com/")
+      messageText.startsWith("https://vt.tiktok.com") ||
+      messageText.startsWith("https://www.tiktok.com/") ||
+      messageText.startsWith("https://www.facebook.com") ||
+      messageText.startsWith("https://www.instagram.com/") ||
+      messageText.startsWith("https://youtu.be/") ||
+      messageText.startsWith("https://youtube.com/") ||
+      messageText.startsWith("https://x.com/") ||
+      messageText.startsWith("https://twitter.com/") ||
+      messageText.startsWith("https://vm.tiktok.com") ||
+      messageText.startsWith("https://fb.watch")
     ) {
-      api.sendMessage("", event.threadID, event.messageID);
-      if (!dipto) {
-        api.sendMessage(
-          "please put a valid fb video link",
-          event.threadID,
-          event.messageID,
-        );
-        return;
-      }
+      const chatId = msg.chat.id;
+      const messageId = msg.message_id;
 
-      const aa = await axios.get(
-        `${await baseApiUrl()}/alldl?url=${encodeURIComponent(dipto)}`,
-      );
-      const bb = aa.data;
-      const shortUrl = await tinyurl.shorten(bb.result);
-      const MSG = `âœ… ðŸ”— Download Url: ${shortUrl}`;
-      let ex;
-      let cp;
-      if (bb.result.includes(".jpg")) {
-        ex = ".jpg";
-        cp = "Here's your Photo <ðŸ˜˜";
-      } else if (bb.result.includes(".png")) {
-        ex = ".png";
-        cp = "Here's your Photo <ðŸ˜˜";
-      } else if (bb.result.includes(".jpeg")) {
-        ex = ".jpeg";
-        cp = "Here's your Photo <ðŸ˜˜";
-      } else {
-        ex = ".mp4";
-        cp = bb.cp;
-      }
+      const wait = await bot.sendMessage(chatId, "⏳ Processing your request...", {
+        reply_to_message_id: messageId,
+      });
+// Store the ID of the "processing" message//
+      const waitMId = wait.message_id; 
+      const videoPath = path.join(__dirname, "caches", "diptoo.mp4");
 
-      const path = __dirname + `/cache/video${ex}`;
-      const vid = (await axios.get(bb.result, { responseType: "arraybuffer" }))
-        .data;
-      fs.writeFileSync(path, Buffer.from(vid, "utf-8"));
-      api.sendMessage(
-        {
-          body: `${cp || null}\n${MSG || null}`,
-          attachment: fs.createReadStream(path),
-        },
-        event.threadID,
-        () => fs.unlinkSync(path),
-        event.messageID,
+      const { data } = await axios.get(
+        `${await baseApiUrl()}/alldl?url=${encodeURIComponent(messageText)}`
       );
-    }
-    if (dipto.startsWith("https://i.imgur.com")) {
-      const dipto3 = dipto.substring(dipto.lastIndexOf("."));
-      const response = await axios.get(dipto, { responseType: "arraybuffer" });
-      const filename = __dirname + `/cache/dipto${dipto3}`;
-      fs.writeFileSync(filename, Buffer.from(response.data, "binary"));
-      api.sendMessage(
+      const videoBuffer = (
+        await axios.get(data.result, { responseType: "arraybuffer" })
+      ).data;
+
+      fs.writeFileSync(videoPath, Buffer.from(videoBuffer, "utf-8"));
+
+      // Delete the "processing" message///
+ await bot.deleteMessage(chatId, waitMId);
+
+      await bot.sendVideo(
+        chatId,
+        videoPath,
         {
-          body: `Downloaded from link`,
-          attachment: fs.createReadStream(filename),
+          caption: `${data.cp || ""}✅`,
+          reply_to_message_id: messageId,
         },
-        event.threadID,
-        () => fs.unlinkSync(filename),
-        event.messageID,
+        {
+          filename: "video.mp4",
+          contentType: "video/mp4",
+        },
       );
+
+      fs.unlinkSync(videoPath);
     }
-  } catch (e) {
-    api.sendMessage(`${e}`, event.threadID, event.messageID);
+  } catch (error) {
+    await bot.sendMessage(msg.chat.id, `❎ Error: ${error.message}`);
   }
 };
-module.exports.run = function ({ api, event, client, __GLOBAL }) {};
