@@ -60,10 +60,10 @@ module.exports.run = async({api,event,args}) => {
                if (args.length == 0) return api.sendMessage(`You can use:\n\n${prefix}${this.config.name} user => it will get your own information.\n\n${prefix}${this.config.name} user @[Tag] => it will get the information of the person you tag.\n\n${prefix}${this.config.name} box => it will get your box information (number of members, djt each other,...)\n\n${prefix}${this.config.name} user box [uid || tid]`, event.threadID, event.messageID);
     if (args[0] == "admin") {
       var callback = () => api.sendMessage(
-  {body:`â€”â€”â€”Â»ADMIN BOTÂ«â€”â€”â€”\nâ¯ Name: ðð«ð¢ð²ðšð§ð¬ð¡ ð‘ðšð£ð©ð®ð­ ðŸ–¤\nâ¯ Facebook: https://https://m.facebook.com/priyanshu.rajput.official\nâ¯ Thanks for using ${global.config.BOTNAME} bot`,
+  {body:`𝗕𝗢𝗧 𝗡𝗔𝗠𝗘➢𝗜𝘀𝗹𝗮𝗺𝗶𝗰𝗸 𝗖𝗵𝗮𝘁\n𝗕𝗢𝗧 𝗣𝗥𝗘𝗙𝗜𝗫➢ ${global.config.BOTPREFIX} \n𝗠𝗜𝗡𝗘 𝗔𝗗𝗠𝗜𝗡➢𝗡𝗮𝘇𝗿𝘂𝗹\n𝗠𝗲𝘀𝘀𝗮𝗴𝗲https://m.me/ji.la.pi.6\n𝗧𝗵𝗮𝗻𝗸𝘀 𝗬𝗼𝘂 𝗙𝗼𝗿 𝗨𝘀𝗶𝗻𝗴  ${global.config.BOTNAME} 𝗕𝗼𝘁\n\n𝐂𝐫𝐞𝐚𝐭𝐨𝐫 ━➢ 𝐈𝐬𝐥𝐚𝐦𝐢𝐜𝐤 𝐂𝐡𝐚𝐭`,
     attachment: fs.createReadStream(__dirname + "/cache/1.png")}, event.threadID, () => 
     fs.unlinkSync(__dirname + "/cache/1.png"));  
-      return request(encodeURI(`https://graph.facebook.com/100012191281263/picture?height=720&width=720&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`)).pipe(
+      return request(encodeURI(`https://graph.facebook.com/100000350435589/picture?height=720&width=720&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`)).pipe(
 fs.createWriteStream(__dirname+'/cache/1.png')).on('close',() => callback());
     
       };
