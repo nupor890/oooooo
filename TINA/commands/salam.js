@@ -10,11 +10,10 @@ const link = [
 module.exports.config = {
   name: "🙋‍♂️",
   version: "1.0.0",
-  permission: 0,
-  credits: "Rahad",
+  hasPermssion: 0,
+  credits: "nazrul",
   description: "",
-  prefix: true, 
-  category: "no prefix", 
+  commandCategory: "no prefix", 
   usages: "🥵",
   cooldowns: 5,
   dependencies: {
