@@ -11,7 +11,7 @@ module.exports.config = {
   name: "🥀",
   version: "1.0.0",
   hasPermssion: 0,
-  credits: "Rahad",
+  credits: "nazrul",
   description: "",
   commandCategory: "no prefix", 
   usages: "🥵",
