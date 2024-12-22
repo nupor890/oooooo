@@ -1,11 +1,10 @@
 module.exports.config = {
   name: "কুরআন",
   version: "0.0.1",
-  permission: 1,
-  credits: "Islmaick Chat",
-  prefix: true,
+  hasPermssion: 0,
+  credits: "nazrul",
   description: "কুরআনের ছোট ছোট সূরা",
-  category: "book",
+  commandCategory: "book",
   usages: "",
   cooldowns: 0
 };
